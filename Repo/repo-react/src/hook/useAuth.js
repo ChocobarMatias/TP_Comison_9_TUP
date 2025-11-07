@@ -2,8 +2,11 @@ import {login} from '../services/authService.js';
 import { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {ADMIN} from '../routers/HomePage.routes.js';
+import {useAuthStore} from "../store/zunstand.js"
 
 export const useAuth = () => {
+
+    const setNombre = useAuthStore((state)=>state.setNombre);
     // Recuperar usuario del localStorage al iniciar
     const [user, setUser] = useState(() => {
         const storedUser = localStorage.getItem('user');
@@ -25,7 +28,9 @@ export const useAuth = () => {
             // Guardar usuario en el estado y localStorage
             setUser(userData);
             localStorage.setItem('user', JSON.stringify(userData));
-            
+            setNombre(userData.nombre);
+
+
             navigate(ADMIN);
         } catch (err) {
             setError(err.message);

@@ -19,6 +19,7 @@ const fetchEstudios = async () => {
         console.error("Error fetching estudios:", error);
     }
 };
+
 useEffect(() => {
     fetchEstudios();
 }, []);
@@ -38,6 +39,7 @@ const crearEstudio = async (estudioData) => {
     try {
         const newEstudio = await createEstudio(estudioData);
         setEstudios([...estudios, newEstudio]);
+        
         if (newEstudio) {
         navigate(ESTUDIOS);
         }
@@ -72,15 +74,6 @@ const eliminarEstudio = async (id) => {
 
 
 
-    return {
-        estudios,
-        setEstudios,
-        getEstudioId,
-        crearEstudio,
-        editarEstudio,
-        eliminarEstudio,
-        getEstudioById,
-        loading,
-        setLoading
-    }
+    return {estudios,setEstudios,getEstudioId,crearEstudio,editarEstudio,eliminarEstudio,
+        getEstudioById,loading,setLoading }
 }
